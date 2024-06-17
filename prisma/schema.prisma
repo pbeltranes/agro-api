@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Fruit {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  varieties Variety[]
+  fruits    Harvest[]
+}
+
+model Variety {
+  id      Int    @id @default(autoincrement())
+  name    String
+  fruitId Int
+  fruit   Fruit  @relation(fields: [fruitId], references: [id])
+
+  @@unique([name, fruitId])
+}
+
+model Harvest {
+  id       Int      @id @default(autoincrement())
+  date     DateTime
+  farmerId Int
+  fruitId  Int
+  farmer   Farmer   @relation(fields: [farmerId], references: [id])
+  fruit    Fruit    @relation(fields: [fruitId], references: [id])
+}
+
+model Farmer {
+  id       Int       @id @default(autoincrement())
+  name     String
+  email    String    @unique
+  fields   Field[]
+  harvests Harvest[]
+}
+
+model Field {
+  id       Int    @id @default(autoincrement())
+  name     String
+  location String
+  farmerId Int
+  farmer   Farmer @relation(fields: [farmerId], references: [id])
+
+  @@unique([name, location])
+}
+
+model Client {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+}
