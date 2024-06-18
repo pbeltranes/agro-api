@@ -2,10 +2,10 @@
 // src/fruits/fruits.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { Fruit } from '../entities/fruit.entity';
+import { FruitEntity } from '../entities/fruit.entity';
 
 @Injectable()
-export class FruitsService {
+export class ClientService {
   constructor() {} // @InjectRepository(Fruit)
   // private readonly fruitsRepository: Repository<Fruit>,
 
@@ -27,20 +27,20 @@ export class FruitsService {
     // return this.fruitsRepository.save(newFruit);
   }
 
-  async update(id: number, updateData: Partial<any>): Promise<any> {
-    // await this.fruitsRepository.update(id, updateData);
-    // const updatedFruit = await this.fruitsRepository.findOne(id);
-    // if (!updatedFruit) {
-    //   throw new NotFoundException(`Fruit #${id} not found`);
-    // }
-    // return updatedFruit;
-  }
+  // async update(id: number, updateData: Partial<any>): Promise<any> {
+  //   // await this.fruitsRepository.update(id, updateData);
+  //   // const updatedFruit = await this.fruitsRepository.findOne(id);
+  //   // if (!updatedFruit) {
+  //   //   throw new NotFoundException(`Fruit #${id} not found`);
+  //   // }
+  //   // return updatedFruit;
+  // }
 
-  async remove(id: number): Promise<void> {
-    //     const result = await this.fruitsRepository.delete(id);
-    //     if (result.affected === 0) {
-    //       throw new NotFoundException(`Fruit #${id} not found`);
-    //     }
-    //   }
-  }
+  // async remove(id: number): Promise<void> {
+  //   //     const result = await this.fruitsRepository.delete(id);
+  //   //     if (result.affected === 0) {
+  //   //       throw new NotFoundException(`Fruit #${id} not found`);
+  //   //     }
+  //   //   }
+  // }
 }
