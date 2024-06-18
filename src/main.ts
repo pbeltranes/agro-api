@@ -15,10 +15,9 @@ export async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Wubot API')
-    .setDescription('The cats API description')
-    .setVersion('1.0')
-    .addTag('seller')
+    .setTitle('Agro API')
+    .setDescription('The agro API description')
+    .setVersion('beta')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

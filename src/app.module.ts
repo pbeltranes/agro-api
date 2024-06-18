@@ -1,11 +1,12 @@
-import { UploadModule } from './upload/upload.module';
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { FruitsModule } from './fruits/fruits.module';
-import { UploadController } from './upload/upload.controller';
-import { PrismaModule } from './providers/prisma/prisma.module';
+import { ClientModule } from 'client/client.module';
 import { CsvModule } from 'nest-csv-parser';
+
+import { FruitModule } from './fruit/fruit.module';
+import { HarvestModule } from './harvest/harvest.module';
+import { PrismaModule } from './providers/prisma/prisma.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -13,13 +14,9 @@ import { CsvModule } from 'nest-csv-parser';
     UploadModule,
     ConfigModule.forRoot(),
     PrismaModule,
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.sqlite',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
-    FruitsModule,
+    FruitModule,
+    HarvestModule,
+    ClientModule,
   ],
 })
 export class AppModule {}

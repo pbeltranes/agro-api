@@ -13,51 +13,57 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+
+// primero debe existir la fruta para poder existir la variedad
 model Fruit {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
   varieties Variety[]
-  fruits    Harvest[]
 }
 
 model Variety {
-  id      Int    @id @default(autoincrement())
+  id      Int       @id @default(autoincrement())
   name    String
   fruitId Int
-  fruit   Fruit  @relation(fields: [fruitId], references: [id])
+  fruit   Fruit     @relation(fields: [fruitId], references: [id])
+  harvests Harvest[]
 
   @@unique([name, fruitId])
 }
-
 model Harvest {
-  id       Int      @id @default(autoincrement())
-  date     DateTime
-  farmerId Int
-  fruitId  Int
-  farmer   Farmer   @relation(fields: [farmerId], references: [id])
-  fruit    Fruit    @relation(fields: [fruitId], references: [id])
+// la cosecha debe tener una una finca y una variedad al menos
+  id        Int      @id @default(autoincrement())
+  varietyId Int
+  variety   Variety  @relation(fields: [varietyId], references: [id])
+  landId    Int
+  land      Land     @relation(fields: [landId], references: [id])
+  clientId  Int
+  client    Client?   @relation(fields: [clientId], references: [id])
 }
 
 model Farmer {
-  id       Int       @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   name     String
-  email    String    @unique
-  fields   Field[]
-  harvests Harvest[]
+  lastName String
+  email    String @unique
+  lands    Land[]
 }
 
-model Field {
-  id       Int    @id @default(autoincrement())
+model Land {
+  id       Int       @id @default(autoincrement())
   name     String
   location String
   farmerId Int
-  farmer   Farmer @relation(fields: [farmerId], references: [id])
+  farmer   Farmer    @relation(fields: [farmerId], references: [id])
+  lands    Harvest[]
 
   @@unique([name, location])
 }
 
 model Client {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
+  id       Int       @id @default(autoincrement())
+  name     String
+  lastName String
+  email    String    @unique
+  harvests Harvest[]
 }
