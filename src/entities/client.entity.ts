@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Variety } from '@prisma/client';
+import { Client } from '@prisma/client';
 
-export class VarietyEntity implements Variety {
+export class ClientEntity implements Client {
   @ApiProperty()
   id: number;
 
@@ -9,10 +9,10 @@ export class VarietyEntity implements Variety {
   name: string;
 
   @ApiProperty()
-  fruitId: number | null;
+  lastName: string;
 
   @ApiProperty()
-  farmerId: number;
+  email: string;
 
   //   @ApiProperty()
   //   published: boolean;

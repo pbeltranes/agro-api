@@ -1,4 +1,3 @@
-// src/upload/upload.controller.ts
 import {
   Controller,
   Post,
@@ -6,29 +5,30 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CsvParser } from 'nest-csv-parser';
-import { FruitsService } from '../fruits/fruits.service';
-import { Fruit } from '../entities/fruit.entity';
-import { ParseResult } from 'papaparse';
 import { Multer } from 'multer';
+import { CsvParser } from 'nest-csv-parser';
+import { ParseResult } from 'papaparse';
+
+import { FruitService } from '../fruit/fruit.service';
+// import {  } from '../entities/fruit.entity';
 
 @Controller('upload')
 export class UploadController {
   constructor(
-    private readonly fruitsService: FruitsService,
+    private readonly fruitService: FruitService,
     private readonly csvParser: CsvParser,
   ) {}
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Multer.File) {
-    const parsedData: ParseResult<Fruit> = await this.csvParser.parse(
+    const parsedData: ParseResult<any> = await this.csvParser.parse(
       file.buffer,
-      Fruit,
+      { Fruit: 'name', Color: 'color', Price: 'price' },
     );
     const fruits = parsedData.data;
     for (const fruit of fruits) {
-      await this.fruitsService.create(fruit);
+      await this.fruitService.create(fruit);
     }
     return { message: 'CSV data successfully uploaded' };
   }

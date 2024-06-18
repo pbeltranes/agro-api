@@ -1,19 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { UploadController } from './upload.controller';
-describe('UploadController', () => {
-  let controller: UploadController;
+import { FarmerService } from './farmer.service';
+
+describe('FarmerService', () => {
+  let service: FarmerService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [UploadController],
+      providers: [FarmerService],
     }).compile();
 
-    controller = module.get<UploadController>(UploadController);
+    service = module.get<FarmerService>(FarmerService);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(service).toBeDefined();
   });
 });
