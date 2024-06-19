@@ -46,6 +46,7 @@ export class FarmerService {
     }
     const landCodes = this.prismaService.landCodeDto(farmer);
     const existingLandCodes = this.prismaService.landCodeEntity(current);
+    console.log(landCodes, existingLandCodes);
     const newLandCodes = landCodes.filter(
       (landCode) => !existingLandCodes.includes(landCode),
     );
@@ -63,24 +64,23 @@ export class FarmerService {
       lands: [...current.lands, ...newLands],
     };
   }
-
-  // async update(id: number, updateData: Partial<any>): Promise<any> {
-  //   const updatedHarvest = await this.prismaService.farmer.update({
-  //     where: { id },
-  //     data: updateData,
-  //   });
-  //   if (!updatedHarvest) {
-  //     throw new NotFoundException(`Harvest #${id} not found`);
-  //   }
-  //   return updatedHarvest;
-  // }
-
-  // async remove(id: number): Promise<void> {
-  //   const result = await this.prismaService.farmer.delete({
-  //     where: { id },
-  //   });
-  //   if (result === null) {
-  //     throw new NotFoundException(`Harvest #${id} not found`);
-  //   }
-  // }
 }
+// async update(id: number, updateData: Partial<any>): Promise<any> {
+//   const updatedHarvest = await this.prismaService.farmer.update({
+//     where: { id },
+//     data: updateData,
+//   });
+//   if (!updatedHarvest) {
+//     throw new NotFoundException(`Harvest #${id} not found`);
+//   }
+//   return updatedHarvest;
+// }
+
+// async remove(id: number): Promise<void> {
+//   const result = await this.prismaService.farmer.delete({
+//     where: { id },
+//   });
+//   if (result === null) {
+//     throw new NotFoundException(`Harvest #${id} not found`);
+//   }
+// }

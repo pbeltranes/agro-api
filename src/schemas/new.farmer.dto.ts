@@ -16,8 +16,8 @@ export const NewFarmer = extendApi(
     lands: z.array(NewLand),
   }),
   {
-    title: 'Fruit',
-    description: 'A Fruit',
+    title: 'Farmer',
+    description: 'A Farmer',
   },
 );
 

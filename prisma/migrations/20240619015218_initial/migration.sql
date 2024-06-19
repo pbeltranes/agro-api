@@ -15,7 +15,6 @@ CREATE TABLE "Variety" (
 -- CreateTable
 CREATE TABLE "Harvest" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "date" DATETIME NOT NULL,
     "varietyId" INTEGER NOT NULL,
     "landId" INTEGER NOT NULL,
     "clientId" INTEGER NOT NULL,

@@ -1,18 +1,23 @@
 // src/fruits/fruits.controller.ts
+import { ZodValidationPipe } from '@anatine/zod-nestjs';
 import {
   Controller,
   Get,
   Post,
   Body,
   Param,
+  UsePipes,
   // Put,
   // Delete,
 } from '@nestjs/common';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { NewClientDto } from 'schemas/new.client.dto';
 
 import { ClientService } from './client.service';
-import { FruitEntity } from '../entities/fruit.entity';
 
+@ApiTags('client')
 @Controller('client')
+@UsePipes(ZodValidationPipe)
 export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
@@ -27,8 +32,9 @@ export class ClientController {
   }
 
   @Post()
-  create(@Body() fruit: Partial<FruitEntity>) {
-    return this.clientService.create(fruit);
+  @ApiBody({ type: NewClientDto })
+  async create(@Body() client: NewClientDto) {
+    return this.clientService.create(client);
   }
 
   // @Put(':id')

@@ -48,7 +48,8 @@ model Farmer {
   email    String @unique
   lands    Land[]
 }
-
+// si se elimina un farmer se eliminan todas las fincas asociadas
+// una finca debe tener un agricultor, si existe la finca con
 model Land {
   id       Int       @id @default(autoincrement())
   name     String
