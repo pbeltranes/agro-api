@@ -27,7 +27,6 @@ export class FruitService {
       where: { name: fruit.name },
       include: { varieties: true },
     });
-    console.log(current);
     if (!current) {
       return this.prismaService.fruit.create({
         data: {
@@ -41,8 +40,9 @@ export class FruitService {
         },
       });
     }
+    const fruitNames = current.varieties.map((variety) => variety.name);
     const pendingVarieties = fruit.varieties
-      .filter((variety) => current.varieties.includes[variety])
+      .filter((variety) => !fruitNames.includes(variety))
       .map((variety) => {
         return {
           fruitId: current.id,
@@ -55,27 +55,26 @@ export class FruitService {
     });
     return {
       ...current,
-      varieties: [...current.varieties, ...newVarities],
+      varieties: [...newVarities],
     };
   }
-
-  // async update(id: number, updateData: Partial<any>): Promise<any> {
-  //   const updatedHarvest = await this.prismaService.farmer.update({
-  //     where: { id },
-  //     data: updateData,
-  //   });
-  //   if (!updatedHarvest) {
-  //     throw new NotFoundException(`Harvest #${id} not found`);
-  //   }
-  //   return updatedHarvest;
-  // }
-
-  // async remove(id: number): Promise<void> {
-  //   const result = await this.prismaService.farmer.delete({
-  //     where: { id },
-  //   });
-  //   if (result === null) {
-  //     throw new NotFoundException(`Harvest #${id} not found`);
-  //   }
-  // }
 }
+// async update(id: number, updateData: Partial<any>): Promise<any> {
+//   const updatedHarvest = await this.prismaService.farmer.update({
+//     where: { id },
+//     data: updateData,
+//   });
+//   if (!updatedHarvest) {
+//     throw new NotFoundException(`Harvest #${id} not found`);
+//   }
+//   return updatedHarvest;
+// }
+
+// async remove(id: number): Promise<void> {
+//   const result = await this.prismaService.farmer.delete({
+//     where: { id },
+//   });
+//   if (result === null) {
+//     throw new NotFoundException(`Harvest #${id} not found`);
+//   }
+// }

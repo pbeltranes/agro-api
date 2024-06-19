@@ -16,4 +16,11 @@ describe('HarvestService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  // {
+  //   "name": "manzana",
+  //   "varieties": [
+  //     "verde"
+  //   ]
+  // }
 });

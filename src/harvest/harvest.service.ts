@@ -1,51 +1,71 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { HarvestEntity } from 'entities/harvest.entity';
+import { PrismaService } from 'providers/prisma/prisma.service';
+import { NewHarvestDto } from 'schemas/new.harvest.dto';
 
 @Injectable()
 export class HarvestService {
-  private prisma: PrismaClient;
+  constructor(private readonly prismaService: PrismaService) {}
 
-  constructor() {
-    this.prisma = new PrismaClient();
-  }
-
-  async findAll(): Promise<any[]> {
-    return this.prisma.harvest.findMany();
-  }
-
-  async findOne(id: number): Promise<any> {
-    const harvest = await this.prisma.harvest.findUnique({
-      where: { id },
+  async findAll(): Promise<HarvestEntity[]> {
+    return this.prismaService.harvest.findMany({
+      include: {
+        variety: true,
+        client: true,
+        land: {
+          include: { farmer: true },
+        },
+      },
     });
-    if (!harvest) {
+  }
+
+  async findOne(id: number): Promise<HarvestEntity> {
+    const fruit = await this.prismaService.harvest.findUnique({
+      where: { id },
+      include: { variety: true },
+    });
+    if (!fruit) {
       throw new NotFoundException(`Harvest #${id} not found`);
     }
-    return harvest;
+    return fruit;
   }
 
-  async create(harvest: any): Promise<any> {
-    return this.prisma.harvest.create({
-      data: harvest,
+  async create(harvest: NewHarvestDto): Promise<HarvestEntity> {
+    return this.prismaService.harvest.create({
+      data: {
+        variety: { connect: { id: harvest.varietyId } },
+        client: { connect: { id: harvest.clientId } },
+        land: { connect: { id: harvest.landId } },
+      },
+      include: {
+        variety: true,
+        client: true,
+        land: {
+          include: {
+            farmer: true,
+          },
+        },
+      },
     });
   }
-
-  // async update(id: number, updateData: Partial<any>): Promise<any> {
-  //   const updatedHarvest = await this.prisma.harvest.update({
-  //     where: { id },
-  //     data: updateData,
-  //   });
-  //   if (!updatedHarvest) {
-  //     throw new NotFoundException(`Harvest #${id} not found`);
-  //   }
-  //   return updatedHarvest;
-  // }
-
-  // async remove(id: number): Promise<void> {
-  //   const result = await this.prisma.harvest.delete({
-  //     where: { id },
-  //   });
-  //   if (result === null) {
-  //     throw new NotFoundException(`Harvest #${id} not found`);
-  //   }
-  // }
 }
+
+// async update(id: number, updateData: Partial<any>): Promise<any> {
+//   const updatedHarvest = await this.prismaService.farmer.update({
+//     where: { id },
+//     data: updateData,
+//   });
+//   if (!updatedHarvest) {
+//     throw new NotFoundException(`Harvest #${id} not found`);
+//   }
+//   return updatedHarvest;
+// }
+
+// async remove(id: number): Promise<void> {
+//   const result = await this.prismaService.farmer.delete({
+//     where: { id },
+//   });
+//   if (result === null) {
+//     throw new NotFoundException(`Harvest #${id} not found`);
+//   }
+// }

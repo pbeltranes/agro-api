@@ -15,7 +15,7 @@ export class FarmerEntity implements Farmer {
   email: string;
 
   @ApiProperty()
-  lands: {
+  lands?: {
     id: number;
     name: string;
     location: string;

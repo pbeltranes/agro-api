@@ -2,15 +2,15 @@ import { createZodDto } from '@anatine/zod-nestjs';
 import { extendApi } from '@anatine/zod-openapi';
 import { z } from 'zod';
 
-export const NewFarmer = extendApi(
+export const NewClient = extendApi(
   z.object({
     name: z.string(),
     lastName: z.string(),
     email: z.string().email(),
   }),
   {
-    title: 'Fruit',
-    description: 'A Fruit',
+    title: 'Client',
+    description: 'A Client',
   },
 );
-export class NewFarmerDto extends createZodDto(NewFarmer) {}
+export class NewClientDto extends createZodDto(NewClient) {}

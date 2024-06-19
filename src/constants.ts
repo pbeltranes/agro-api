@@ -1,0 +1,10 @@
+export const FARMER_MAIL = 'Mail Agricultor';
+export const FARMER_NAME = 'Nombre Agricultor';
+export const FARMER_LAST_NAME = 'Apellido Agricultor';
+export const LAND_NAME = 'Nombre Campo';
+export const LAND_LOCATION = 'Ubicación de Campo';
+export const FRUIT_NAME = 'Fruta Cosechada';
+export const FRUIT_VARIETY = 'Variedad Cosechada';
+export const CLIENT_NAME = 'Nombre Cliente';
+export const CLIENT_LAST_NAME = 'Apellido Cliente';
+export const CLIENT_MAIL = 'Mail Cliente';

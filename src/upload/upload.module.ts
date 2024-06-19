@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
-import { CsvModule } from 'nest-csv-parser';
+import { ClientModule } from 'client/client.module';
+import { FarmerModule } from 'farmer/farmer.module';
+import { FruitModule } from 'fruit/fruit.module';
+import { HarvestModule } from 'harvest/harvest.module';
 
 import { UploadController } from './upload.controller';
-import { FruitModule } from '../fruit/fruit.module';
+import { UploadService } from './upload.service';
+
 @Module({
-  imports: [FruitModule, CsvModule],
   controllers: [UploadController],
+  providers: [UploadService],
+  imports: [FarmerModule, FruitModule, HarvestModule, ClientModule],
 })
 export class UploadModule {}

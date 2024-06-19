@@ -1,19 +1,23 @@
 // src/fruits/fruits.controller.ts
+import { ZodValidationPipe } from '@anatine/zod-nestjs';
 import {
   Controller,
   Get,
   Post,
   Body,
   Param,
+  UsePipes,
   // Put,
   // Delete,
 } from '@nestjs/common';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { NewFarmerDto } from 'schemas/new.farmer.dto';
 
 import { FarmerService } from './farmer.service';
 
+@ApiTags('farmer')
 @Controller('farmer')
+@UsePipes(ZodValidationPipe)
 export class FarmerController {
   constructor(private readonly farmerService: FarmerService) {}
 
@@ -29,7 +33,7 @@ export class FarmerController {
 
   @Post()
   @ApiBody({ type: NewFarmerDto })
-  create(@Body() fruit: NewFarmerDto) {
+  async create(@Body() fruit: NewFarmerDto) {
     return this.farmerService.create(fruit);
   }
 

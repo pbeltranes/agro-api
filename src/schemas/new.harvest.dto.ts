@@ -5,12 +5,12 @@ import { z } from 'zod';
 export const NewHarvest = extendApi(
   z.object({
     varietyId: z.number(),
-    clientId: z.string().optional(),
-    landId: z.string(),
+    clientId: z.number().optional(),
+    landId: z.number(),
   }),
   {
-    title: 'Fruit',
-    description: 'A Fruit',
+    title: 'Harverst',
+    description: 'A Harvest',
   },
 );
 export class NewHarvestDto extends createZodDto(NewHarvest) {}

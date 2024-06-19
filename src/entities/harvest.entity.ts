@@ -5,9 +5,6 @@ export class HarvestEntity implements Harvest {
   @ApiProperty()
   id: number;
 
-  @ApiProperty()
-  date: Date;
-
   // @ApiProperty()
   // lastName: string;
 

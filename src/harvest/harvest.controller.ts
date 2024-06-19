@@ -7,10 +7,12 @@ import {
   // Put,
   // Delete,
 } from '@nestjs/common';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { NewHarvestDto } from 'schemas/new.harvest.dto';
 
 import { HarvestService } from './harvest.service'; // Update import to HarvestService
-import { HarvestEntity } from '../entities/harvest.entity'; // Update import to HarvestEntity
 
+@ApiTags('harvest') // Update controller tag to 'harvest'
 @Controller('harvest') // Update controller path to 'harvests'
 export class HarvestController {
   // Update controller class name to HarvestsController
@@ -29,7 +31,8 @@ export class HarvestController {
   }
 
   @Post()
-  create(@Body() harvest: Partial<HarvestEntity>) {
+  @ApiBody({ type: NewHarvestDto })
+  async create(@Body() harvest: NewHarvestDto) {
     return this.harvestService.create(harvest); // Update service method to create
   }
 
