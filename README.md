@@ -12,7 +12,12 @@ $ pnpm install
 ```
 
 ## Migraciones
+Primero debemos crear el env, para ello copiamos el de ejemplo:
+```bash
+cp .env.example .env
+```
 Para manejar las migraciones de la base de datos, usa los siguientes comandos:
+
 ```bash
 # Ejecutar migraciones
 $ pnpm run prisma:migrate
