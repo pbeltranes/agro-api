@@ -8,6 +8,7 @@ export async function bootstrap() {
     AppModule,
     // adapter,
   );
+  
   const config = new DocumentBuilder()
     .setTitle('Agro API')
     .setDescription('The agro API description')
@@ -17,6 +18,12 @@ export async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(8080);
+  const port = 8080; // Puedes cambiar el puerto si es necesario
+  await app.listen(port);
+  
+  console.clear();
+  // Log para mostrar el puerto en la consola
+  console.info(`\n\n\n\n\n 🚀 Application is running on: http://localhost:${port}/api \n\n\n`);
 }
+
 bootstrap();
