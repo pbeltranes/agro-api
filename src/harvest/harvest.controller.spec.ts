@@ -1,16 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { PrismaModule } from 'providers/prisma/prisma.module';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import { FruitsController } from './harvests.controller';
+import { HarvestController } from './harvest.controller';
+import { HarvestService } from './harvest.service';
 
-describe('FruitsController', () => {
-  let controller: FruitsController;
+describe('HarvestController', () => {
+  let controller: HarvestController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [FruitsController],
+      controllers: [HarvestController],
+      providers: [HarvestService],
+      imports: [PrismaModule],
     }).compile();
 
-    controller = module.get<FruitsController>(FruitsController);
+    controller = module.get<HarvestController>(HarvestController);
   });
 
   it('should be defined', () => {

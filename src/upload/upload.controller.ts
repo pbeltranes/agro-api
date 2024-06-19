@@ -58,6 +58,7 @@ export class UploadController {
   async uploadFile(@UploadedFile() file: Multer.File) {
     try {
       const parsedData = await this.uploadService.parseCSV(file);
+      if (!parsedData) throw new BadRequestException('Unable to parse file');
       const { rows, errors } =
         await this.uploadService.validateFile(parsedData);
       const harvest = [];

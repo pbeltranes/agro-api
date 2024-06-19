@@ -46,6 +46,7 @@ export class FarmerService {
     }
     const landCodes = this.prismaService.landCodeDto(farmer);
     const existingLandCodes = this.prismaService.landCodeEntity(current);
+    console.log(landCodes, existingLandCodes);
     const newLandCodes = landCodes.filter(
       (landCode) => !existingLandCodes.includes(landCode),
     );

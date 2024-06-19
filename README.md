@@ -1,73 +1,72 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+<h3 align="center">Prueba Backend Onesta</h3>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descripción
+Este proyecto es una prueba técnica para demostrar habilidades en el desarrollo de backend. La aplicación permite gestionar datos de agricultores, frutas, cosechas y clientes, además de la capacidad de cargar datos desde un archivo CSV. La API está documentada y accesible mediante Swagger.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
+## Instalación
+Para configurar y correr la aplicación localmente, sigue estos pasos:
 ```bash
 $ pnpm install
 ```
 
-## Running the app
-
+## Migraciones
+Para manejar las migraciones de la base de datos, usa los siguientes comandos:
 ```bash
-# development
-$ pnpm run start
+# Ejecutar migraciones
+$ pnpm run prisma:migrate
 
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+# Resetear la base de datos y aplicar migraciones
+$ pnpm run prisma:reset
 ```
 
-## Test
+## Ejecución de la aplicación
+Puedes correr la aplicación en modo desarrollo utilizando los comandos:
+```bash
+# Modo desarrollo
+$ pnpm run start
+
+# Modo watch (reinicio automático)
+$ pnpm run start:dev
+```
+La documentación y los endpoints de prueba están disponibles en Swagger en la siguiente URL:
+```
+# ruta de documentacion y test en swagger
+$ http://localhost:8080/api
+
+```
+
+## Pruebas
 
 ```bash
-# unit tests
+# Ejecutar pruebas unitarias
 $ pnpm run test
 
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
+# Ver la cobertura de pruebas
 $ pnpm run test:cov
 ```
 
-## Support
+## Revisión funcionalidades
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Para cargar un archivo CSV, sigue estos pasos:
 
-## Stay in touch
+1. Accede a Swagger en http://localhost:8080/api.
+2. Selecciona el endpoint POST /upload.
+3. Sube el archivo cosecha.csv que se encuentra en la raíz de este repositorio.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Además, la API proporciona 12 endpoints para operaciones CRUD (Crear, Leer, Actualizar, Borrar) sobre las estructuras de farmer, fruit, client y harvest. Cada endpoint incluye ejemplos de uso.
+### Documentación Visual
+![documentacion](<doc/Captura de pantalla 2024-06-19 a la(s) 18.08.04.png>)
+![doc2](<doc/Captura de pantalla 2024-06-19 a la(s) 18.13.13.png>)
+![alt text](<doc/Captura de pantalla 2024-06-19 a la(s) 18.15.43.png>)
 
-## License
 
-Nest is [MIT licensed](LICENSE).
+## Alcances
+
+- Los ID's son autoincrementales para simplificar el ejercicio.
+- Se valida que cada campo en el CSV tenga al menos un carácter.
+- Al usar los endpoints de creación, se verifica si la entidad ya existe para evitar duplicados y siempre retornar la estructura existente.
+- No se completó la cobertura total de pruebas debido a limitaciones de tiempo y la naturaleza práctica del ejercicio.
+
+## Author
+
+- Paul Beltrán - [Github](https://github.com/pbeltranes) - [Lindked](https://www.linkedin.com/in/paul-beltran-espinosa/)

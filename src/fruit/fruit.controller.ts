@@ -49,14 +49,4 @@ export class FruitController {
       new BadRequestException(e);
     }
   }
-
-  // @Put(':id')
-  // update(@Param('id') id: string, @Body() updateData: Partial<FruitEntity>) {
-  //   return this.fruitService.update(+id, updateData);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.fruitService.remove(+id);
-  // }
 }

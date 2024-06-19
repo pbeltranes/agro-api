@@ -1,4 +1,3 @@
-// src/fruits/fruits.controller.ts
 import { ZodValidationPipe } from '@anatine/zod-nestjs';
 import {
   Controller,

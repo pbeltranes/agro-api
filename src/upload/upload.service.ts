@@ -19,8 +19,8 @@ import {
 
 @Injectable()
 export class UploadService {
-  async parseCSV(file: Multer.File): Promise<RowDto> {
-    const parsedData: RowDto = await new Promise((resolve, reject) => {
+  async parseCSV(file: Multer.File): Promise<NewRowCSVDto[]> {
+    const parsedData: NewRowCSVDto[] = await new Promise((resolve, reject) => {
       csv.parse(
         file.buffer,
         {
@@ -46,6 +46,7 @@ export class UploadService {
   ): Promise<{ rows: NewRowCSVDto[]; errors: string[] }> {
     const errors: string[] = [];
     const rows = [];
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for await (const [index, rowData] of parsedData.entries()) {
       const { row, error } = await this.validateFileRow(rowData);
 
@@ -58,7 +59,7 @@ export class UploadService {
     return { rows, errors };
   }
 
-  private async validateFileRow(
+  async validateFileRow(
     rowData: RowDto,
   ): Promise<{ row: NewRowCSVDto; error: string }> {
     const result = Row.safeParse(this.transformData(rowData));
@@ -83,7 +84,7 @@ export class UploadService {
     };
   }
 
-  private transformData = (item) => {
+  transformData = (item) => {
     // Obtén la clave y el valor separados por ";"
     const [keys, values] = Object.entries(item)[0];
     // Divide las claves y los valores en arrays
