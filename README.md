@@ -3,7 +3,7 @@
 ## Descripción
 Este proyecto es una prueba técnica para demostrar habilidades en el desarrollo de backend. La aplicación permite gestionar datos de agricultores, frutas, cosechas y clientes, además de la capacidad de cargar datos desde un archivo CSV. La API está documentada y accesible mediante Swagger.
 
-Este projecto unso como framework principal [Nest](https://docs.nestjs.com/) en conjunto con [Prisma](https://www.prisma.io/orm) como ORM
+> Este projecto uso como framework principal [Nest](https://docs.nestjs.com/) en conjunto con [Prisma](https://www.prisma.io/orm), además se recomienda uso de [pnpm](https://pnpm.io/es/installation#usando-pnpm). 
 
 ## Instalación
 Para configurar y correr la aplicación localmente, sigue estos pasos:
